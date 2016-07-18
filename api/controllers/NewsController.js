@@ -6,14 +6,17 @@
  */
 
 module.exports = {
-	hi: function (req, res) {
-		News.find().exec(function(err, response) {
-			return res.send(response);
-		});
-  },
+    get: function (req, res) {
+        var number = 3;
+        var page = req.param('page');
+
+        News.find().paginate({page: page, limit: number}).exec(function(err, response) {
+            return res.send(response);
+        });
+    },
   
-  bye: function (req, res) {
-    return res.redirect("http://www.sayonara.com");
-  }
+    bye: function (req, res) {
+        return res.redirect("http://www.sayonara.com");
+    }
 };
 
