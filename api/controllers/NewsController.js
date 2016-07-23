@@ -10,8 +10,22 @@ module.exports = {
         var number = 3;
         var page = req.param('page');
 
-        News.find().paginate({page: page, limit: number}).exec(function(err, response) {
-            return res.send(response);
+        sails.async.parallel({
+            data: function(callback) { 
+                News.find().paginate({page: page, limit: number}).exec(function(err, response) {
+                    callback(null, response);
+                });
+            },
+            total: function(callback) {
+                News.count().exec(function(err, data) {
+                    callback(null, data);
+                });
+            }
+        }, function(error, results) {
+            results.page = page;
+            results.number = number;
+            
+            res.send(results);
         });
     },
   
