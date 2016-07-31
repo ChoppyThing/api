@@ -12,7 +12,7 @@ module.exports = {
 
         sails.async.parallel({
             data: function(callback) { 
-                News.find().paginate({page: page, limit: number}).exec(function(err, response) {
+                News.find().paginate({page: page, limit: number}).populate('user').populate('categories').populate('comments').exec(function(err, response) {
                     callback(null, response);
                 });
             },
@@ -24,7 +24,7 @@ module.exports = {
         }, function(error, results) {
             results.page = page;
             results.number = number;
-            
+
             res.send(results);
         });
     },
