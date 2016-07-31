@@ -28,7 +28,15 @@ module.exports = {
             res.send(results);
         });
     },
-  
+
+    getOne: function(req, res) {
+        var id = req.param('id');
+
+        News.find({id: id}).populate('user').populate('categories').populate('comments').exec(function(err, response) {
+            res.send(response);
+        });
+    },
+
     bye: function (req, res) {
         return res.redirect("http://www.sayonara.com");
     }
