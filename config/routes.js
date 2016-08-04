@@ -34,7 +34,12 @@ module.exports.routes = {
 
   '/': {
     view: 'homepage'
-  }
+  },
+
+  /**
+   * News controller
+   */
+  'POST /comment/add': 'CommentController.addComment',
 
   /***************************************************************************
   *                                                                          *
