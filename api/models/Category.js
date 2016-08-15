@@ -24,10 +24,19 @@ module.exports = {
       type: 'text'
     },
 
+    type: {
+      type: 'string'
+    },
+
     news: {
       collection:'news',
       via: 'category',
       through: 'newscategory'
+    },
+
+    photos: {
+      collection:'photography',
+      via: 'category'
     }
   }
 };
